@@ -1,43 +1,178 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Elite Wedding Events — We Decorate Your World. Premium wedding decoration and complete event services in Nellore.">
+<meta name="theme-color" content="#080807">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="assets/logo-emblem.png">
 <title>Elite Wedding Events | We Decorate Your World</title>
-<meta name="description" content="Elite Wedding Events — premium wedding decoration and complete event services in Nellore.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="nav" id="nav">
-  <a class="logo" href="#home"><span class="logo-mark">E</span><span>ELITE WEDDING EVENTS<small>WE DECORATE YOUR WORLD</small></span></a>
-  <button class="menu">☰</button>
-  <nav class="navlinks"><a href="#work">Our Work</a><a href="#services">Services</a><a href="#about">About</a><a class="nav-cta" href="#contact">Plan Your Event</a></nav>
+  <a class="brand" href="#home" aria-label="Elite Wedding Events home">
+    <img src="assets/logo-emblem.png" class="brand-mark" alt="">
+    <span class="brand-copy">
+      <strong>ELITE WEDDING EVENTS</strong>
+      <small>WE DECORATE YOUR WORLD</small>
+    </span>
+  </a>
+  <button class="menu" aria-label="Open menu">☰</button>
+  <nav class="navlinks">
+    <a href="#work">Our Work</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a class="nav-cta" href="#contact">Plan Your Event</a>
+  </nav>
 </header>
+
 <main id="home">
 <section class="hero">
-  <div class="hero-media" id="heroMedia"></div><div class="hero-shade"></div>
+  <div class="hero-slides" id="heroSlides"></div>
+  <div class="hero-shade"></div>
   <div class="hero-content">
-    <p class="kicker">Nellore · Andhra Pradesh · Event Experiences</p>
+    <p class="kicker">NELLORE · ANDHRA PRADESH · EVENT EXPERIENCES</p>
     <h1>We Decorate<br><em>Your World.</em></h1>
     <p>Premium wedding décor, celebrations and complete event solutions — designed to make your occasion feel extraordinary.</p>
-    <div class="actions"><a class="btn gold" href="#work">Explore Our Work</a><a class="btn ghost" href="https://wa.me/919652090534?text=Hi%20Elite%20Wedding%20Events%2C%20I%27d%20like%20to%20discuss%20an%20event." target="_blank">WhatsApp Us</a></div>
+    <div class="actions">
+      <a class="btn gold" href="#work">Explore Our Work</a>
+      <a class="btn ghost" href="https://wa.me/919652090534?text=Hi%20Elite%20Wedding%20Events%2C%20I%27d%20like%20to%20discuss%20an%20event." target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+  </div>
+
+  <div class="hero-controls">
+    <button id="heroPrev" aria-label="Previous image">←</button>
+    <div class="hero-dots" id="heroDots"></div>
+    <button id="heroNext" aria-label="Next image">→</button>
+  </div>
+  <div class="hero-counter"><span id="heroCurrent">01</span><i></i><span id="heroTotal">05</span></div>
+  <div class="hero-note">Elite Wedding Events · Nellore</div>
+  <div class="scroll-note">SCROLL TO EXPLORE ↓</div>
+</section>
+
+<section class="brand-marquee" aria-label="Elite Wedding Events services">
+  <div class="marquee-track">
+    <div class="marquee-set">
+      <span>WEDDING DECORATION</span><i>✦</i>
+      <span>BIRTHDAY PARTIES</span><i>✦</i>
+      <span>NAMING CEREMONY</span><i>✦</i>
+      <span>HOUSE WARMING CEREMONY</span><i>✦</i>
+      <span>CORPORATE EVENTS</span><i>✦</i>
+      <span>COLLEGE EVENTS</span><i>✦</i>
+      <span>INAUGURATIONS</span><i>✦</i>
+      <span>FESTIVAL EVENTS</span><i>✦</i>
+      <span>SCHOOL FEST</span><i>✦</i>
+      <span>ORCHESTRA FJ</span><i>✦</i>
+      <span>BRIDAL MAKEUP</span><i>✦</i>
+      <span>MEHANDI</span><i>✦</i>
+      <span>WEDDING ALBUM</span><i>✦</i>
+      <span>CANDID PHOTOGRAPHY</span><i>✦</i>
+      <span>SURPRISE ENTRIES</span><i>✦</i>
+      <span>CATERING</span><i>✦</i>
+      <span>LIGHTING & SOUNDS</span><i>✦</i>
+      <span>HIRERS</span><i>✦</i>
+    </div>
+    <div class="marquee-set" aria-hidden="true">
+      <span>WEDDING DECORATION</span><i>✦</i>
+      <span>BIRTHDAY PARTIES</span><i>✦</i>
+      <span>NAMING CEREMONY</span><i>✦</i>
+      <span>HOUSE WARMING CEREMONY</span><i>✦</i>
+      <span>CORPORATE EVENTS</span><i>✦</i>
+      <span>COLLEGE EVENTS</span><i>✦</i>
+      <span>INAUGURATIONS</span><i>✦</i>
+      <span>FESTIVAL EVENTS</span><i>✦</i>
+      <span>SCHOOL FEST</span><i>✦</i>
+      <span>ORCHESTRA FJ</span><i>✦</i>
+      <span>BRIDAL MAKEUP</span><i>✦</i>
+      <span>MEHANDI</span><i>✦</i>
+      <span>WEDDING ALBUM</span><i>✦</i>
+      <span>CANDID PHOTOGRAPHY</span><i>✦</i>
+      <span>SURPRISE ENTRIES</span><i>✦</i>
+      <span>CATERING</span><i>✦</i>
+      <span>LIGHTING & SOUNDS</span><i>✦</i>
+      <span>HIRERS</span><i>✦</i>
+    </div>
   </div>
 </section>
-<section class="intro section"><p class="overline">The Elite Experience</p><h2>Your celebration deserves a <em>setting worth remembering.</em></h2><div class="gold-line"></div><p>We transform venues with floral artistry, stage design, lighting, sound and thoughtful event details — bringing your vision to life with an elegant finish.</p></section>
-<section id="work" class="section work"><div class="section-head"><div><p class="overline">Selected Work</p><h2>Made to be <em>remembered.</em></h2></div><p>Explore our latest celebrations and event transformations.</p></div><div class="filters" id="filters"></div><div class="grid" id="eventsGrid"></div></section>
-<section id="services" class="section services"><div class="section-head"><div><p class="overline">What We Do</p><h2>One team for the <em>whole celebration.</em></h2></div></div><div class="service-list">
-<div><b>01</b><h3>Wedding Decoration</h3><p>Stage décor, floral arrangements, traditional themes and venue styling.</p></div>
-<div><b>02</b><h3>Birthdays & Family Events</h3><p>Birthday parties, naming ceremonies and housewarming celebrations.</p></div>
-<div><b>03</b><h3>Corporate & Institutional</h3><p>Corporate events, college events, school fests and inaugurations.</p></div>
-<div><b>04</b><h3>Photography & Bridal</h3><p>Bridal makeup, mehendi, candid photography and wedding albums.</p></div>
-<div><b>05</b><h3>Entertainment & Production</h3><p>Orchestra, DJs, lighting, sound, surprise entries and hirers.</p></div>
-<div><b>06</b><h3>Catering & Event Support</h3><p>Catering and supporting services for complete celebrations.</p></div>
-</div></section>
-<section id="about" class="split"><div class="split-image" id="aboutImage"></div><div class="split-copy"><p class="overline">Why Elite</p><h2>Your occasion.<br><em>Our canvas.</em></h2><p>Every celebration has a personality. Our role is to translate that personality into the space — through flowers, colour, form, lighting and the small details guests remember.</p><p>Whether it is a traditional wedding stage or a modern celebration, we build the visual experience around your occasion.</p><div class="signature">We Decorate Your World.</div></div></section>
-<section id="contact" class="cta section"><div><p class="overline">Let's Create Something Beautiful</p><h2>Planning an <em>event?</em></h2><p>Tell us what you're celebrating. We'll take it from there.</p><div class="actions center"><a class="btn gold" href="https://wa.me/919652090534?text=Hi%20Elite%20Wedding%20Events%2C%20I%27d%20like%20to%20plan%20an%20event." target="_blank">Start on WhatsApp</a><a class="btn ghost" href="tel:+919652090534">Call +91 96520 90534</a></div><a class="instagram" href="https://www.instagram.com/elite_wedding_events" target="_blank">Instagram · @elite_wedding_events ↗</a></div></section>
+
+<section class="intro section">
+  <p class="overline">THE ELITE EXPERIENCE</p>
+  <h2>Your celebration deserves a <em>setting worth remembering.</em></h2>
+  <div class="gold-line"></div>
+  <p>We transform venues with floral artistry, stage design, lighting, sound and thoughtful event details — bringing your vision to life with an elegant finish.</p>
+</section>
+
+<section id="work" class="section work">
+  <div class="section-head">
+    <div><p class="overline">SELECTED WORK</p><h2>Made to be <em>remembered.</em></h2></div>
+    <p>Choose a category, then open any project to view the photographs in full screen.</p>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="eventsGrid"></div>
+</section>
+
+<section id="services" class="section services">
+  <div class="section-head"><div><p class="overline">WHAT WE DO</p><h2>One team for the <em>whole celebration.</em></h2></div></div>
+  <div class="service-list">
+    <div><b>01</b><h3>Wedding Decoration</h3><p>Stage décor, floral arrangements, traditional themes and venue styling.</p></div>
+    <div><b>02</b><h3>Birthdays & Family Events</h3><p>Birthday parties, naming ceremonies and housewarming celebrations.</p></div>
+    <div><b>03</b><h3>Corporate & Institutional</h3><p>Corporate events, college events, school fests and inaugurations.</p></div>
+    <div><b>04</b><h3>Photography & Bridal</h3><p>Bridal makeup, mehendi, candid photography and wedding albums.</p></div>
+    <div><b>05</b><h3>Entertainment & Production</h3><p>Orchestra, DJs, lighting, sound, surprise entries and hirers.</p></div>
+    <div><b>06</b><h3>Catering & Event Support</h3><p>Catering and supporting services for complete celebrations.</p></div>
+  </div>
+</section>
+
+<section id="about" class="split">
+  <div class="split-image split-gallery" id="aboutImage" aria-label="Selected Elite Wedding Events work"><div class="split-gallery-track" id="aboutGalleryTrack"></div><div class="split-gallery-caption">SELECTED WORK · ELITE WEDDING EVENTS</div></div>
+  <div class="split-copy">
+    <p class="overline">WHY ELITE</p><h2>Your occasion.<br><em>Our canvas.</em></h2>
+    <p>Every celebration has a personality. Our role is to translate that personality into the space — through flowers, colour, form, lighting and the small details guests remember.</p>
+    <p>Whether it is a traditional wedding stage or a modern celebration, we build the visual experience around your occasion.</p>
+    <div class="signature">We Decorate Your World.</div>
+  </div>
+</section>
+
+<section id="contact" class="cta section">
+  <div>
+    <p class="overline">LET'S CREATE SOMETHING BEAUTIFUL</p>
+    <h2>Planning an <em>event?</em></h2>
+    <p>Tell us what you're celebrating. We'll take it from there.</p>
+    <div class="actions center">
+      <a class="btn gold" href="https://wa.me/919652090534?text=Hi%20Elite%20Wedding%20Events%2C%20I%27d%20like%20to%20plan%20an%20event." target="_blank" rel="noopener">Start on WhatsApp</a>
+      <a class="btn ghost" href="tel:+919652090534">Call +91 96520 90534</a>
+    </div>
+    <a class="instagram-premium" href="https://www.instagram.com/elite_wedding_events" target="_blank" rel="noopener">
+  <img class="brand-social-icon large" src="assets/logo-emblem.png" alt="Elite Wedding Events logo">
+  <span><small>FOLLOW OUR WORK</small><strong>@elite_wedding_events</strong></span>
+  <span class="ig-arrow">↗</span>
+</a>
+  </div>
+</section>
 </main>
-<footer><strong>ELITE WEDDING EVENTS</strong><span>WE DECORATE YOUR WORLD · NELLORE</span><span>© <span id="year"></span></span></footer>
-<a class="float" href="https://wa.me/919652090534?text=Hi%20Elite%20Wedding%20Events%2C%20I%27d%20like%20to%20discuss%20an%20event." target="_blank">☏</a>
+
+<footer>
+  <div class="footer-brand footer-lockup">
+    <img src="assets/logo-emblem.png" class="brand-mark" alt="">
+    <span class="brand-copy">
+      <strong>ELITE WEDDING EVENTS</strong>
+      <small>WE DECORATE YOUR WORLD</small>
+    </span>
+  </div>
+  <div class="footer-meta">
+    <a class="footer-instagram" href="https://www.instagram.com/elite_wedding_events" target="_blank" rel="noopener">
+      <img class="brand-social-icon" src="assets/logo-emblem.png" alt="Elite Wedding Events logo"><span>Instagram</span><b>@elite_wedding_events</b><span>↗</span>
+    </a>
+    <a href="https://wa.me/919652090534" target="_blank" rel="noopener">WhatsApp · +91 96520 90534</a>
+    <span>© <span id="year"></span> Elite Wedding Events</span>
+  </div>
+</footer>
+
+<a class="float whatsapp" href="https://wa.me/919652090534?text=Hi%20Elite%20Wedding%20Events%2C%20I%27d%20like%20to%20discuss%20an%20event." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">☏</a>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>

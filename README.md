@@ -205,3 +205,54 @@ Once the full photo collection is available:
 - Do not disable RLS.
 - Do not put customer/private information in public event descriptions.
 - Test admin access in a private/incognito window before launch.
+
+
+## V3 UI/UX updates
+- Restored the supplied Elite Wedding Events logo in the header, footer, favicon and admin panel.
+- Hero section is now a multi-image automatic slideshow using portfolio photos.
+- Added hero arrows, progress dots, counter and floating category/project tags.
+- Category filters are displayed as premium pill-style controls.
+- Clicking a project opens a true full-screen image viewer with previous/next controls, thumbnails and image counter.
+- Admin upload now supports one or many photos, plus an “Add more photos” flow with thumbnails and remove-before-upload.
+- Existing Supabase schema and public portfolio loading remain compatible with the V2 backend.
+
+
+## V3.1 refinements
+- Removed the hero's upper-right category/project tags.
+- Footer now uses the exact same emblem + wordmark lockup style as the header.
+- Instagram is now a clear premium CTA in the contact section and footer.
+- Admin area refreshed as a premium Portfolio Studio with live-site shortcut, owner dashboard, status card and polished upload/workspace styling.
+
+
+## V3.2 refinements
+- Removed any remaining hero floating tag/label styling.
+- Hero navigation is kept minimal at the lower edge so it does not cover the main artwork.
+- Replaced the generic Instagram glyph with the Elite Wedding Events emblem for consistent brand identity.
+
+
+## V3.3 refinements
+- Restored the V2-style vertical floating “Elite Wedding Events · Nellore” brand note on the hero.
+- Kept the removed category tags out of the hero.
+- Hero images are preloaded before autoplay begins to prevent image-pop/flicker.
+- Slideshow crossfade and slow-zoom transitions are smoother and longer for a more premium presentation.
+
+
+## V3.4 — hero slideshow + service band
+- Hero photography now starts rotating automatically as soon as the page opens.
+- Each hero image stays visible for about 5 seconds with a cinematic crossfade/slow-zoom.
+- All hero photos continue preloading in the background for smoother subsequent slides.
+- Added the horizontal moving service/category band from the supplied reference: Weddings, Floral Décor, Celebrations, Corporate Events, Photography, Lighting & Sound.
+
+
+## V3.5 — typography + dynamic lower image
+- Hero typography is clearer and closer to the V2 presentation with larger, stronger display lettering and improved spacing/contrast.
+- The lower “Why Elite” image is no longer a fixed single image.
+- It now automatically cycles through the available portfolio photos, including future photos loaded from Supabase.
+- As the owner adds new event galleries, the lower visual section can automatically showcase them.
+
+
+## Band-only update
+This package is based on V3.5. The only functional/design change is the horizontal service band:
+- Includes all supplied services.
+- Runs as a seamless infinite loop.
+- Does not alter the V3.5 hero typography, hero slideshow, lower gallery, branding, or admin functionality.
