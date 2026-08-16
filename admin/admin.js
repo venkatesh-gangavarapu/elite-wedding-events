@@ -1,7 +1,22 @@
 const U=window.EWE_CONFIG?.url||"",K=window.EWE_CONFIG?.anonKey||"",client=(window.supabase&&U&&K)?window.supabase.createClient(U,K):null;
 const $=id=>document.getElementById(id);let session=null;
 function msg(t){$("loginMsg").textContent=t}
-async function start(){if(!client){msg("Add Supabase URL and anon key to config.js first.");return}const {data}=await client.auth.getSession();session=data.session;if(session)show();client.auth.onAuthStateChange((_e,s)=>{session=s;if(s)show();else location.reload()})}
+async function start(){
+  if(!client){msg("Add Supabase URL and anon key to config.js first.");return}
+  const {data}=await client.auth.getSession();
+  session=data.session;
+  if(session) show();
+  client.auth.onAuthStateChange((event,s)=>{
+    session=s;
+    if(event==="SIGNED_IN" && s) show();
+    if(event==="SIGNED_OUT"){
+      $("dashboard").classList.add("hidden");
+      $("login").classList.remove("hidden");
+      $("logout").classList.add("hidden");
+      msg("You have been signed out.");
+    }
+  });
+}
 function show(){$("login").classList.add("hidden");$("dashboard").classList.remove("hidden");$("logout").classList.remove("hidden");loadEvents()}
 $("loginBtn").onclick=async()=>{if(!client)return msg("Supabase is not configured.");const {error}=await client.auth.signInWithPassword({email:$("email").value,password:$("password").value});msg(error?error.message:"Signed in.")};
 $("logout").onclick=async()=>client?.auth.signOut();

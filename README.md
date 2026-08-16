@@ -1,5 +1,8 @@
 # Elite Wedding Events — Production Zero-Cost Build
 
+> Local admin URL: `http://localhost:8000/admin/`
+> The admin page requires Supabase `url` + public anon key in `config.js` before login can work.
+
 **Domain:** `eliteweddingevents.online`  
 **Business:** Elite Wedding Events, Nellore  
 **Tagline:** We Decorate Your World  
