@@ -5,16 +5,25 @@ on:
     branches: [master]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   validate:
+    name: Validate Portfolio
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v5
 
       - name: Validate required files
         shell: bash
         run: |
+          set -e
+
+          echo "Checking required project files..."
+
           test -f index.html
           test -f app.js
           test -f styles.css
@@ -24,22 +33,88 @@ jobs:
           test -f architecture/architecture.md
           test -f docs/deployment.md
           test -f docs/security.md
+          test -f docs/troubleshooting.md
+          test -f docs/performance.md
+          test -f docs/cost-optimization.md
 
-      - name: Check for obvious secret markers
+          echo "All required files are present."
+
+      - name: Check for obvious committed secrets
         shell: bash
         run: |
-          if grep -RniE 'service_role|SUPABASE_SERVICE_ROLE|BEGIN PRIVATE KEY|AWS_SECRET_ACCESS_KEY|CLOUDFLARE_API_TOKEN'             --exclude-dir=.git --exclude='*.md' .; then
-            echo "Potential secret marker found. Review before merging."
+          set -e
+
+          echo "Scanning repository for high-risk credential patterns..."
+
+          if grep -RniE \
+            --exclude-dir=.git \
+            --exclude-dir=node_modules \
+            --exclude-dir=.github \
+            --exclude='*.md' \
+            --exclude='*.svg' \
+            --exclude='*.png' \
+            --exclude='*.jpg' \
+            --exclude='*.jpeg' \
+            --exclude='*.webp' \
+            -- \
+            '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|AKIA[0-9A-Z]{16}|aws_secret_access_key[[:space:]]*[:=]|AWS_SECRET_ACCESS_KEY[[:space:]]*[:=]|CLOUDFLARE_API_TOKEN[[:space:]]*[:=]|SUPABASE_SERVICE_ROLE_KEY[[:space:]]*[:=]' \
+            .; then
+
+            echo "::error::Potential credential detected. Review the matching file before merging."
             exit 1
+
           fi
+
+          echo "No obvious high-risk credentials detected."
 
       - name: Validate sitemap
         shell: bash
         run: |
+          set -e
+
+          echo "Validating sitemap.xml..."
+
+          test -s sitemap.xml
           grep -q '<urlset' sitemap.xml
           grep -q 'https://eliteweddingevents.online/' sitemap.xml
 
-      - name: Validate robots
+          echo "Sitemap validation passed."
+
+      - name: Validate robots.txt
         shell: bash
         run: |
+          set -e
+
+          echo "Validating robots.txt..."
+
+          test -s robots.txt
           grep -q 'Sitemap: https://eliteweddingevents.online/sitemap.xml' robots.txt
+
+          echo "robots.txt validation passed."
+
+      - name: Validate production domain references
+        shell: bash
+        run: |
+          set -e
+
+          echo "Checking production domain references..."
+
+          grep -q 'eliteweddingevents.online' index.html
+          grep -q 'eliteweddingevents.online' sitemap.xml
+          grep -q 'eliteweddingevents.online' robots.txt
+
+          echo "Production domain validation passed."
+
+      - name: Validation summary
+        shell: bash
+        run: |
+          echo "========================================"
+          echo " Elite Wedding Events CI Validation"
+          echo "========================================"
+          echo "✓ Required files"
+          echo "✓ Secret pattern scan"
+          echo "✓ Sitemap"
+          echo "✓ robots.txt"
+          echo "✓ Production domain"
+          echo "========================================"
+          echo "Validation completed successfully."
