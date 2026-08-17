@@ -256,3 +256,13 @@ This package is based on V3.5. The only functional/design change is the horizont
 - Includes all supplied services.
 - Runs as a seamless infinite loop.
 - Does not alter the V3.5 hero typography, hero slideshow, lower gallery, branding, or admin functionality.
+
+
+## Image optimization — zero-cost implementation
+- New photos selected in the admin portal are resized client-side to a maximum 2400px long edge.
+- They are encoded as high-quality WebP at approximately 88% quality before being uploaded to Supabase Storage.
+- This happens in the owner's browser, so no paid image-processing API is required.
+- The website continues to use the same `event_photos` table and `event-photos` bucket, so no database migration is required.
+- Original files on the owner's phone/computer are never modified.
+- Existing uploaded images are not changed automatically; they can continue to display normally.
+- The full-screen gallery still receives the high-resolution web version, while the browser handles responsive display and lazy loading.

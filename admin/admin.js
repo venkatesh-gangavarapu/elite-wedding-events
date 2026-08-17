@@ -36,6 +36,47 @@ async function delEvent(id){
  if(photos?.length)await client.storage.from("event-photos").remove(photos.map(x=>x.path));
  await client.from("event_photos").delete().eq("event_id",id);await client.from("events").delete().eq("id",id);loadEvents();
 }
+
+// Client-side image optimization: keeps originals untouched on the user's device,
+// but uploads a high-quality, web-friendly version to Supabase.
+// This avoids adding another paid image-processing service.
+async function optimizeImage(file){
+  const MAX_EDGE = 2400;
+  const QUALITY = 0.88;
+
+  // SVG/GIF and already-small non-raster files are not altered.
+  if(!/^image\/(jpeg|png|webp)$/.test(file.type)) return file;
+
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
+  const width = Math.max(1, Math.round(bitmap.width * scale));
+  const height = Math.max(1, Math.round(bitmap.height * scale));
+
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d", {alpha:false});
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close();
+
+  const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/webp", QUALITY));
+  if(!blob) return file;
+
+  const base = file.name.replace(/\.[^.]+$/, "");
+  return new File([blob], `${base}.webp`, {
+    type: "image/webp",
+    lastModified: file.lastModified
+  });
+}
+
+async function prepareUpload(file, index, total){
+  $("formMsg").textContent = `Optimizing photo ${index+1} of ${total}…`;
+  const optimized = await optimizeImage(file);
+  return optimized;
+}
+
 $("eventForm").onsubmit=async e=>{
  e.preventDefault();
  if(!selectedFiles.length){$("formMsg").textContent="Please select at least one photo.";return}
@@ -44,8 +85,14 @@ $("eventForm").onsubmit=async e=>{
   const {data:event,error}=await client.from("events").insert({title:$("title").value,category:$("category").value,location:$("location").value,event_date:$("date").value||null,description:$("description").value,published:$("published").checked,created_by:session.user.id}).select().single();
   if(error)throw error;
   for(let i=0;i<selectedFiles.length;i++){
-   const f=selectedFiles[i],safe=f.name.replace(/[^a-zA-Z0-9._-]/g,"-"),path=`${event.id}/${crypto.randomUUID()}-${safe}`;
-   const up=await client.storage.from("event-photos").upload(path,f,{cacheControl:"31536000",upsert:false});
+   const f=await prepareUpload(selectedFiles[i],i,selectedFiles.length);
+   const safe=f.name.replace(/[^a-zA-Z0-9._-]/g,"-"),path=`${event.id}/${crypto.randomUUID()}-${safe}`;
+   $("formMsg").textContent = `Uploading photo ${i+1} of ${selectedFiles.length}…`;
+   const up=await client.storage.from("event-photos").upload(path,f,{
+     cacheControl:"31536000",
+     upsert:false,
+     contentType:"image/webp"
+   });
    if(up.error)throw up.error;
    const ins=await client.from("event_photos").insert({event_id:event.id,path,sort_order:i});
    if(ins.error)throw ins.error;
