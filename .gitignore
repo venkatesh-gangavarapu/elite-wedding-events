@@ -1,4 +1,13 @@
-config.local.js
+# Local secrets/config
 .env
-.DS_Store
+.env.*
+config.local.js
+
+# Dependencies
 node_modules/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

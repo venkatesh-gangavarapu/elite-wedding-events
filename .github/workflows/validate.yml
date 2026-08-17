@@ -1,0 +1,45 @@
+name: Portfolio Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required files
+        shell: bash
+        run: |
+          test -f index.html
+          test -f app.js
+          test -f styles.css
+          test -f robots.txt
+          test -f sitemap.xml
+          test -f SECURITY.md
+          test -f architecture/architecture.md
+          test -f docs/deployment.md
+          test -f docs/security.md
+
+      - name: Check for obvious secret markers
+        shell: bash
+        run: |
+          if grep -RniE 'service_role|SUPABASE_SERVICE_ROLE|BEGIN PRIVATE KEY|AWS_SECRET_ACCESS_KEY|CLOUDFLARE_API_TOKEN'             --exclude-dir=.git --exclude='*.md' .; then
+            echo "Potential secret marker found. Review before merging."
+            exit 1
+          fi
+
+      - name: Validate sitemap
+        shell: bash
+        run: |
+          grep -q '<urlset' sitemap.xml
+          grep -q 'https://eliteweddingevents.online/' sitemap.xml
+
+      - name: Validate robots
+        shell: bash
+        run: |
+          grep -q 'Sitemap: https://eliteweddingevents.online/sitemap.xml' robots.txt
