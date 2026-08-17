@@ -20,33 +20,13 @@ The platform provides a premium customer-facing portfolio and an owner administr
 
 ## Architecture
 
-```text
-Customer
-   |
-   v
-eliteweddingevents.online
-   |
-   v
-Cloudflare (DNS + HTTPS)
-   |
-   v
-Public Web App
-   |
-   +------> Supabase PostgreSQL / Storage
-   |
-   +------> WhatsApp / Instagram
+## Architecture
 
-Owner
-   |
-   v
-Admin Portal
-   |
-   +------> Supabase Auth
-   +------> Event metadata
-   +------> Optimized photo upload
-```
+![Elite Wedding Events Architecture](architecture/architecture-diagram.png)
 
-See [architecture/architecture.md](architecture/architecture.md).
+See [architecture documentation](architecture/architecture.md) for details.
+
+
 
 ## Production Workflow
 

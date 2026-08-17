@@ -1,46 +1,25 @@
-# Architecture
+# Elite Wedding Events — Architecture
 
-## Components
+![Architecture Diagram](architecture-diagram.png)
 
-### Cloudflare
-Public DNS, HTTPS and the configured web deployment/edge layer.
+## Customer Flow
 
-### Public Application
-Premium responsive portfolio, hero slideshow, event categories, gallery and customer contact paths.
+Customer → custom domain → Cloudflare → public web application → Supabase data/storage.
 
-### Admin Portal
-Owner authentication and portfolio/event management.
+## Owner Flow
 
-### Supabase
-- Authentication
-- PostgreSQL database
-- Event metadata
-- Photo metadata
-- Object storage
+Owner → Admin Portal → Supabase Authentication → event metadata and portfolio storage.
 
-## Data Flow
+## Delivery / Validation Flow
 
-```text
-Customer → Cloudflare → Public Website
-                           |
-                           +→ Supabase data
-                           +→ Supabase Storage
+Developer → Git → GitHub → GitHub Actions → validation → production deployment.
 
-Owner → Admin Portal → Supabase Auth
-                    → Event metadata
-                    → Optimized image upload
-```
+## DevOps Controls
 
-## Design Decisions
-
-### Serverless/free-tier approach
-The business is primarily a portfolio site with variable traffic. An always-on VM would add unnecessary cost and operational overhead.
-
-### Supabase
-Authentication, relational data and object storage are provided through one platform.
-
-### Cloudflare
-Provides the public domain/DNS/HTTPS layer without requiring an always-on application server.
-
-### Client-side image optimization
-Large wedding photographs are converted to high-quality WebP in the owner's browser, reducing storage and bandwidth without a paid image-processing API.
+- Source control through GitHub
+- CI validation on pushes and pull requests
+- High-risk credential pattern detection
+- Sitemap and robots.txt validation
+- Production-domain validation
+- Supabase authentication and database policies
+- Client-side WebP image optimization
